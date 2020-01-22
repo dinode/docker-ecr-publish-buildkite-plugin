@@ -8,7 +8,8 @@ get_ecr_url() {
   aws ecr describe-repositories \
     --repository-names "${repository_name}" \
     --output text \
-    --query 'repositories[0].repositoryUri'
+    --query 'repositories[0].repositoryUri' \
+    --region 'ap-southeast-2'
 }
 
 read_build_args() {
@@ -92,7 +93,7 @@ push_tags() {
 }
 
 echo '--- Logging in to ECR'
-$(aws ecr get-login --no-include-email)
+$(aws ecr get-login --no-include-email --region ap-southeast-2)
 
 echo '--- Reading plugin parameters'
 
